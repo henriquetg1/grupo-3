@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Setter
 public class Historico {
     @MongoId
-    private Integer id;
+    private String id;
 
     private String email;
 

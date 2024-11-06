@@ -18,7 +18,7 @@ public class HistoricoController {
 
     @PostMapping
     public ResponseEntity<?> adicionarAoHistorico(@RequestHeader("Authorization") String jwtToken, @RequestParam String idFilme) {
-        var h = historicoService.adicionarAoHistorico(idFilme, jwtToken);
+        var h = historicoService.adicionarAoHistorico(jwtToken, idFilme);
         return ResponseEntity.status(HttpStatus.CREATED).body(h);
     }
 

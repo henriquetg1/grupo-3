@@ -34,10 +34,8 @@ public class HistoricoService {
 
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
-        String email = TokenUtils.getEmailFromToken(jwtToken);
-
-        // Ajuste o endpoint conforme necessário
-        String url = "http://localhost:8080/planos/usuarios/" + email;
+        // URL simplificada
+        String url = "http://54.91.81.157:8080/api/usuarios";
 
         try {
             ResponseEntity<PlanoUsuarioDTO> response = restTemplate.exchange(
@@ -62,12 +60,13 @@ public class HistoricoService {
         }
     }
 
+
     private CatalogoDTO obterFilmeDoCatalogo(String filmeId, String jwtToken) {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
 
         // Se o serviço do catálogo não exigir autenticação, remova esta linha
-        headers.set("Authorization", "Bearer " + jwtToken);
+        headers.set("Authorization", jwtToken);
 
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
@@ -123,10 +122,10 @@ public class HistoricoService {
         return historico;
     }
 
-    public Historico adicionarAoHistorico(String filmeId, String jwtToken) {
-        if (!usuarioTemPlanoAtivo(jwtToken)) {
-            throw new RuntimeException("Usuário não tem plano ativo");
-        }
+    public Historico adicionarAoHistorico(String jwtToken, String filmeId) {
+//        if (!usuarioTemPlanoAtivo(jwtToken)) {
+//            throw new RuntimeException("Usuário não tem plano ativo");
+//        }
 
         CatalogoDTO filme = obterFilmeDoCatalogo(filmeId, jwtToken);
         if (filme == null) {
