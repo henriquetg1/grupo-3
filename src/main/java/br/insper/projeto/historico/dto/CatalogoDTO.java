@@ -17,5 +17,5 @@ public class CatalogoDTO {
     private ArrayList<String> diretores;
     private ArrayList<String> atores;
 
-    private String tempoFilme;
+    private Integer tempoFilme;
 }

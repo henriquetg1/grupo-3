@@ -23,10 +23,16 @@ public class HistoricoController {
     }
 
     @GetMapping
-    public ResponseEntity<?> listarHistorico(@RequestHeader("Authorization") String jwtToken, @RequestParam LocalDateTime data, @RequestParam String titulo, @RequestParam String genero) {
-        List<?> historico = historicoService.listarHistorico(jwtToken, data, titulo, genero);
+    public ResponseEntity<?> listarHistorico(
+            @RequestHeader("Authorization") String jwtToken,
+            @RequestParam(required = false) LocalDateTime data,
+            @RequestParam(required = false) String titulo,
+            @RequestParam(required = false) String genero) {
+
+        var historico = historicoService.listarHistorico(jwtToken, data, titulo, genero);
         return ResponseEntity.ok(historico);
     }
+
 
     @GetMapping("/resumo")
     public ResponseEntity<?> gerarResumoUsuario(@RequestHeader("Authorization") String jwtToken) {
