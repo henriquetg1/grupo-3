@@ -59,4 +59,4 @@ jobs:
         script: |
           docker stop grupo-3
           docker rm --force grupo-3
-          docker run -d -p 8083:8083 --network=rede --name grupo-3 henriquetg1/grupo-3:${{ github.sha }}
+          docker run -d -p 8080:8080 --network=rede --name grupo-3 henriquetg1/grupo-3:${{ github.sha }}
