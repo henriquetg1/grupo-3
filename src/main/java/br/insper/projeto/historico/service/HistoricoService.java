@@ -47,7 +47,8 @@ public class HistoricoService {
 
             if (response.getStatusCode().is2xxSuccessful()) {
                 PlanoUsuarioDTO planoUsuario = response.getBody();
-                return planoUsuario.isAtivo();
+                // Verifica se o nome é "N/A" para identificar usuários inativos
+                return planoUsuario != null && !"N/A".equals(planoUsuario.getNome());
             } else {
                 return false;
             }
@@ -59,7 +60,6 @@ public class HistoricoService {
             throw new RuntimeException("Erro ao verificar plano do usuário", e);
         }
     }
-
 
     private CatalogoDTO obterFilmeDoCatalogo(String filmeId, String jwtToken) {
         RestTemplate restTemplate = new RestTemplate();
@@ -97,9 +97,9 @@ public class HistoricoService {
 
     // função que lista todos os filmes do histórico, podendo filtrar por data, título e gênero
     public List<Historico> listarHistorico(String jwtToken, LocalDateTime data, String titulo, String genero) {
-        if (!usuarioTemPlanoAtivo(jwtToken)) {
-            throw new RuntimeException("Usuário não tem plano ativo");
-        }
+//        if (!usuarioTemPlanoAtivo(jwtToken)) {
+//            throw new RuntimeException("Usuário não tem plano ativo");
+//        }
 
         String email = TokenUtils.getEmailFromToken(jwtToken);
 
@@ -144,9 +144,9 @@ public class HistoricoService {
     }
 
     public String gerarResumoUsuario(String jwtToken) {
-        if (!usuarioTemPlanoAtivo(jwtToken)) {
-            throw new RuntimeException("Usuário não tem plano ativo");
-        }
+//        if (!usuarioTemPlanoAtivo(jwtToken)) {
+//            throw new RuntimeException("Usuário não tem plano ativo");
+//        }
 
         String email = TokenUtils.getEmailFromToken(jwtToken);
 

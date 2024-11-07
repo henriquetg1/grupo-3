@@ -3,6 +3,7 @@ package br.insper.projeto.historico.dto;
 public class PlanoUsuarioDTO {
     private String email;
     private String plano;
+    private String nome; // novo campo para identificar o nome
     private boolean ativo;
 
     public String getEmail() {
@@ -27,6 +28,14 @@ public class PlanoUsuarioDTO {
 
     public boolean isAtivo() {
         return ativo;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 }
 
